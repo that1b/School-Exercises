@@ -1,0 +1,24 @@
+namespace HanoiTowers
+{
+	class MainClass
+	{
+		static void Move(int discs, char from, char to, char remainder)
+		{
+			if (discs == 1)
+			{
+				Console.WriteLine("Move disc from tower {0} to tower {1}", from, to);
+			}
+			else
+			{
+        Move(discs - 1, from, remainder, to);
+				Console.WriteLine("Move disc from tower {0} to tower {1}", from, to);
+				Move(discs - 1, remainder, to, from);
+			}
+		}
+		public static void Main(string[] args)
+		{
+			Move(8, 'a', 'c', 'b');
+			Console.ReadLine();
+		}
+	}
+}

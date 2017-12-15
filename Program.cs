@@ -3,8 +3,15 @@ using System.IO;
 
 namespace Exercise8A_2
 {
+        class Student
+    {
+        public string Name;
+        public string FacultyNumber;
+        public decimal[] Marks;
+    }
     class Program
     {
+        
         static int ReadInt(string prompt)
         {
             bool valid;

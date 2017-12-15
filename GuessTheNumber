@@ -1,0 +1,29 @@
+using System;
+namespace GuessTheNumber
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var r = new Random();
+            int rand = r.Next(1, 101);
+            Console.Write("Enter a number: ");
+            string guessString = Console.ReadLine();
+            int guess = int.Parse(guessString);
+            int attempt = 1;
+
+            do
+            {
+                if (rand > guess)
+                    Console.WriteLine("Upwards");
+                else
+                    Console.WriteLine("Downwards");
+                attempt++;
+                guess = int.Parse(Console.ReadLine());
+            }
+            while (!(rand == guess));
+            Console.WriteLine("Correct.You've made {0} attempts.",attempt);
+            Console.ReadLine();
+        }
+    }
+}

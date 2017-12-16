@@ -1,0 +1,74 @@
+using System;
+using System.Text;
+using System.IO;
+
+
+namespace _07_Dec_2017Tolga
+{
+ class BytesList
+    {
+        byte[] list;
+        
+        public void AddRange(byte[] range, int count)
+        {
+            if (count == 0)
+                return;
+
+            if (list == null)
+            {
+                list = new byte[count];
+                for (int i = 0; i < count; ++i)
+                {
+                    list[i] = range[i];
+                }
+            }
+            else
+            {
+                var newArr = new byte[list.Length+count];
+
+                for (int i = 0; i < list.Length; ++i)
+                    newArr[i] = list[i];
+                for (int i = 0; i < count; ++i)
+                    newArr[list.Length + i] = range[i];
+                list = newArr;
+                   
+            }
+
+        }
+
+        public byte[] ToArray()
+        {
+            return list;
+        }
+    }
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            var fileBytes = new BytesList();
+            try
+            {
+                using (var f = File.Open("data.txt", FileMode.Open))
+                {
+                    int read;
+                    do
+                    {
+                        var buffer = new byte[10];
+                        read = f.Read(buffer, 0, buffer.Length);
+                        fileBytes.AddRange(buffer, read);
+                    }
+                    while (read > 0);
+                    var s = Encoding.UTF8.GetString(fileBytes.ToArray());
+                    Console.Write(s);                   
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.Write("Файлът не е намерен: ");
+                Console.WriteLine(e.Message);
+            }
+            Console.ReadLine();
+        }
+    }
+}
